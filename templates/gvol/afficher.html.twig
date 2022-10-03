@@ -1,0 +1,94 @@
+{% extends 'base2.html.twig' %}
+{% block html %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+{% block body %}
+<body>
+{% for message in app.flashes('info') %}
+    <div class="alert alert-success">{{ message }}</div>
+{% endfor %}
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+
+ <div class="block-content block-content-full">
+    <!-- DataTables init on table by adding .js-dataTable-full class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _es6/pages/be_tables_datatables.js -->
+
+    <table class="table table-bordered table-striped table-vcenter js-dataTable-full" id="tableac">
+        <thead>
+        <tr>
+            <th class="text-center" style="width: 80px;">ID</th>
+            <th class="d-none d-sm-table-cell" style="width: 15%;">Nom du Vol</th>
+            <th class="d-none d-sm-table-cell" style="width: 20%;" >Date de Départ</th>
+            <th class="d-none d-sm-table-cell" style="width: 15%;">Prix</th>
+            <th class="d-none d-sm-table-cell" style="width: 15%;">Path</th>
+            <th class="d-none d-sm-table-cell" style="width: 15%;">Départ</th>
+            <th class="d-none d-sm-table-cell" style="width: 15%;">Arriver</th>
+            <th class="d-none d-sm-table-cell" style="width: 15%;">Chauffeur</th>
+            <th class="d-none d-sm-table-cell" style="width: 15%;">Modifier </th>
+            <th class="d-none d-sm-table-cell" style="width: 15%;">Supprimer</th>
+        </tr>
+        </thead>
+        <tbody{%  for c in vol %}>
+        <tr>
+            <td class="text-center font-size-sm">{{c.id}}</td>
+            <td class="d-none d-sm-table-cell">
+                <p class="badge badge-success">{{c.nom}}</p>
+            </td>
+            <td class="font-w600 font-size-sm">
+                <em class="text-muted">{{ c.dated |date('d-m-Y')}}</em>
+            </td>
+            <td class="d-none d-sm-table-cell font-size-sm" >
+                 <em class="text-muted">{{ c.prix}}</em>
+            </td>
+            </td>
+            <td class="d-none d-sm-table-cell font-size-sm" >
+                <em class="text-muted">{{ c.path}}</em>
+            </td>
+            <td>
+                <em class="text-muted font-size-sm">{{ c.apartir}}</em>
+            </td>
+            <td>
+                <em class="text-muted font-size-sm">{{ c.vers}}</em>
+            </td>
+            <td>
+                <em class="text-muted font-size-sm">{{ c.chauffeur }}</em>
+            </td>
+
+            <td><a class="badge badge-danger" href=" {{ path('updatev',{'id':c.id}) }}" class="nav-link">Update</a></td>
+            <td><a class="badge badge-info" href=" {{ path('d1',{'id':c.id}) }}" class="nav-link">Delete</a></td>
+
+        </tr>
+        </tbody {% endfor %}>
+
+
+    </table>
+
+
+</div>
+
+    <form method="post" action="{{ path('ajoutvol') }}">
+    <input class="btn btn-success" type="submit" value="Ajouter">
+    </form>
+<form method="post" action="{{ path('statistiques') }}">
+    <input class="btn btn-success" type="submit" value="Statistique">
+</form>
+
+    <form method="post" action="{{ path('imprimer_index') }}">
+        <input class="btn btn-success" type="submit" value="PDF">
+    </form>
+
+
+
+
+
+</body>
+{% endblock %}
+</html>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'base1.html.twig' %}
+ {% block body %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div style="">
+    <tr>
+
+        <h1> List Of  categorie Events </h1>
+        <form method="post" action="{{ path('rechercheCategorie') }}">
+            <label>Search</label>
+            <input type="text" name="search"><input type="submit" value="Recherche">
+        </form>
+
+    </tr>
+    <br><br><br>
+    <tr>
+        <table border="1">
+            <tr>
+                <th>Idcategorie</th>
+                <th>type</th>
+                <th>idevent</th>
+                <th>Delete</th>
+                <th>Update</th>
+
+            </tr>
+            <tr {% for c in categorie %}>
+                <td>{{ c.idcategorie }}</td>
+                <td>{{ c.type }}</td>
+                <td>{{ c.idevent }}</td>
+                <td><a href=" {{ path('b',{'id':c.idcategorie}) }}">Delete</a></td>
+                <td><a href=" {{ path('updatecat',{'id':c.idcategorie}) }}">Update </a></td>
+
+
+            </tr {% endfor %}>
+
+
+        </table>
+
+    </tr>
+
+
+
+
+
+</div>
+
+
+
+
+</body>
+</html>
+{% endblock %}
+

@@ -1,0 +1,29 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}New User{% endblock %}
+
+{% block body %}
+<section class="page-info-section set-bg" data-setbg="" >
+    <div class="login_register_wrap section" >
+        <div class="container">
+            <div class="row justify-content-center" >
+                <div class="col-xl-6 col-md-10" >
+                    <div class="login_wrap" style="margin-top: 50px";  >
+                        <div class="padding_eight_all bg-white" >
+                            <table >
+                                <div style="background-color: #1e1e27; color: #ffb320; border: 2px" >{{ form_start(formb) }}
+                                    <h1 >Create new User</h1>
+
+                                    {{ include('user/_formb.html.twig') }}
+
+                                    <a href="{{ path('user_index') }}" style="color: #ffb320">back to list</a>
+                                </div>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}

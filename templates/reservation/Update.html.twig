@@ -1,0 +1,52 @@
+{% extends 'base2.html.twig' %}
+
+{% block body %}
+
+    <div style="margin: auto;
+    width: 65%;
+    border: 3px solid green;
+    padding: 5px;">
+        <h1>Update Reservation</h1>
+
+
+        {{ form_start(UpdateF,{'attr': {'novalidate': 'novalidate'}}) }}
+        <table>
+            <tr>
+
+                <td>{{ form_label(UpdateF.etat) }}</td>
+                <td>{{ form_widget(UpdateF.etat) }}</td>
+                <td> {{ form_errors(UpdateF.etat) }}</td>
+            </tr>
+            <tr>
+                <td>{{ form_label(UpdateF.posMap)}}</td>
+                <td>{{ form_widget(UpdateF.posMap)}}</td>
+                <td>{{ form_errors(UpdateF.posMap)}}</td>
+            </tr>
+            <tr>
+                <td>{{ form_label(UpdateF.prixt) }}</td>
+                <td>{{ form_widget(UpdateF.prixt) }}</td>
+                <td>{{ form_errors(UpdateF.prixt) }}</td>
+            </tr>
+            <tr>
+                <td>{{ form_label(UpdateF.numv) }}</td>
+                <td>{{ form_widget(UpdateF.numv) }}</td>
+                <td>{{ form_errors(UpdateF.numv) }}</td>
+            </tr>
+            <tr>
+                <td>{{ form_label(UpdateF.referance) }}</td>
+                <td>{{ form_widget(UpdateF.referance) }}</td>
+                <td>{{ form_errors(UpdateF.referance) }}</td>
+            </tr><tr>
+                <td>{{ form_label(UpdateF.idho) }}</td>
+                <td>{{ form_widget(UpdateF.idho) }}</td>
+                <td>{{ form_errors(UpdateF.idho) }}</td>
+            </tr>
+
+
+        </table>
+
+        {{ form_end(UpdateF) }}
+    </div>
+
+
+{% endblock %}

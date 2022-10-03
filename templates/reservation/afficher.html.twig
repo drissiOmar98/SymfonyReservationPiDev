@@ -1,0 +1,94 @@
+{% extends 'base2.html.twig' %}
+
+ {% block body %}
+
+<div style="margin: auto;
+  width: auto;
+  border: 3px solid green;
+  padding: 5px">
+
+
+
+
+
+<table>
+    <td>
+        <h1>Liste de Reservation</h1>
+        <form action="{{ path('search') }}" method="post">
+            <label >Recherche</label>
+            <input type="text" name="search" ><input type="submit" value="Recherche">
+        </form>
+    </td>
+    <td>
+        <a href=" {{ path('triePrix') }}"> Trie Par Prix </a>
+    </td>
+
+
+    </table>
+
+
+
+        <div class="block-content">
+            <table class="table table-sm table-vcenter">
+                <thead>
+                <tr>
+
+                    <th class="d-none d-sm-table-cell" style="width: 5%;">IDReservaion</th>
+                    <th class="d-none d-sm-table-cell" style="width: 5%;">Nom Hotel</th>
+                    <th class="d-none d-sm-table-cell" style="width: 5%;">Type Transport</th>
+                    <th class="d-none d-sm-table-cell" style="width: 5%;">Nom partenaire</th>
+                    <th class="d-none d-sm-table-cell" style="width: 5%;">Etat</th>
+                    <th class="d-none d-sm-table-cell" style="width: 5%;">Position</th>
+                    <th class="d-none d-sm-table-cell" style="width: 5%;">PrixT</th>
+                    <th class="d-none d-sm-table-cell" style="width: 5%;">DateReservation</th>
+                    <th class="d-none d-sm-table-cell" style="width: 5%;">Update/Delete</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr{% for r in res %}>
+                    <th class="text-center" scope="row">{{ r.idR }}</th>
+                    <td class="font-w600 font-size-sm">
+                        <a class="text-center">{{ r.idHo.nom }}</a>
+                    </td>
+                    <td class="font-w600 font-size-sm">
+                        <a class="text-center">{{ r.referance.nom }}</a>
+                    </td>
+                    <td class="font-w600 font-size-sm">
+                        <a class="text-center">{{ r.numv.nom }}</a>
+                    </td>
+                    <td class="font-w600 font-size-sm">
+                        <a class="text-center">{{ r.etat }}</a>
+                    </td>
+                    <td class="font-w600 font-size-sm">
+                        <a class="text-center">{{ r.posMap }}</a>
+                    </td>
+                    <td class="font-w600 font-size-sm">
+                        <a class="text-center">{{ r.prixT }}</a>
+                    </td>
+                    <td class="d-none d-sm-table-cell">
+                        <span class="badge badge-info">{{ r.dateReservation |date('Y-m-d\\TH:i:sP')  }}</span>
+                    </td>
+                    <td class="text-center">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-light" data-toggle="tooltip" title="Edit Client" >
+                                <a class="fa fa-fw fa-pencil-alt" href=" {{ path('update',{'id':r.idR}) }}"></a>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-light" data-toggle="tooltip" title="Remove Client" >
+                                <a class="fa fa-fw fa-times" href=" {{ path('dR',{'id':r.idR}) }}"></a>
+                            </button>
+                        </div>
+                    </td>
+                </tr {% endfor %}>
+
+
+                </tbody>
+            </table>
+        </div>
+     <td><a href="{{ path('res_new') }}">Ajouter Reservation</a></td>
+
+    </div>
+</div>
+
+
+ {% endblock %}

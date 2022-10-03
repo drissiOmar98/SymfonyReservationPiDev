@@ -1,0 +1,17 @@
+{% extends 'base2.html.twig' %}
+{% block body %}
+
+    <div style="margin: auto;width: 65%;
+            border: 3px Solid  pink;
+            padding: 5px;">
+
+        <h1> Ajout Détail</h1>
+        {{ form_start(form1, {attr: {'novalidate': 'novalidate'}}) }}
+
+        {{ form(form1) }}
+        <form method="post" action="{{ path('afficherd') }}">
+            <input class="btn btn-danger" type="submit" value="Annuler">
+        </form>
+    </div>
+
+{% endblock %}

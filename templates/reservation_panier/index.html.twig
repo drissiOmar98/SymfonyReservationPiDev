@@ -1,0 +1,80 @@
+{% extends 'reservation/shop.html.twig' %}
+
+
+{% block grid %}
+
+    <div class="block block-rounded">
+        <div class="block-header">
+            <h3 class="block-title"><small>Reservation Liste</small></h3>
+        </div>
+        <div class="block-content block-content-full" style="overflow-x:auto;" >
+            <!-- DataTables init on table by adding .js-dataTable-buttons class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _es6/pages/be_tables_datatables.js -->
+            <table class="table table-bordered table-striped table-vcenter js-dataTable-buttons" >
+                <thead>
+                <tr>
+                    <th class="text-center" style="width: 80px;">idReservation</th>
+                    <th class="d-none d-sm-table-cell">Items</th>
+                    <th class="d-none d-sm-table-cell" style="width: 30%;">Prix</th>
+                    <th class="d-none d-sm-table-cell" style="width: 15%;">Date de Reservation</th>
+                    <th style="width: 15%;">Actions</th>
+                    <th  style="width: 20px;">PDF</th>
+                    <th  style="width: 20px;">QrCode</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr>
+
+                    <td class="font-w600 font-size-sm">
+                        <a >{{ reservation_paniers.id }}</a>
+                    </td>
+                    <td class="font-w600 font-size-sm">
+                        <a class="text-center">{{ reservation_paniers.items ? reservation_paniers.items|join(', ') : '' }}</a>
+                    </td>
+
+                    <td class="font-w600 font-size-sm">
+                        <a class="text-center">{{ reservation_paniers.prix }}</a>
+                    </td>
+                    <td class="font-w600 font-size-sm">
+                        <a class="text-center">{{ reservation_paniers.date | date("d/m/Y") }}</a>
+                    </td>
+                    <td class="font-w600 font-size-sm">
+                        <a href="{{ path('reservation_panier_show', {'id': reservation_paniers.id}) }}">show</a>
+                        <a href="{{ path('reservation_panier_edit', {'id': reservation_paniers.id}) }}">edit</a>
+                    </td>
+
+
+                    <td class="font-w600 font-size-sm"><a href="{{ path('reservaide_index', {'id': reservation_paniers.id}) }}">  <div class="button mt-2 d-flex flex-row align-items-center"> <button class="btn btn-sm btn-outline-primary w-100">My Reservation</button> </div></a></td>
+
+                    <td>
+                        <div class="col-md-6">
+                            {% if qrCode %}
+                                <img src="{{ qrCode }}" alt="qr-code">
+                            {% endif %}
+                        </div>
+                    </td>
+
+                </tbody>
+            </table>
+            <div class="col mb-2">
+                <div class="row">
+                    <div class="col-sm-12  col-md-6">
+                        <a href="{{path('hotel_index')}}"class="btn btn-block btn-light">Continue Shopping</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

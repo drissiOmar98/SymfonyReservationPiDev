@@ -1,0 +1,121 @@
+{% extends 'base2.html.twig' %}
+
+
+{% block body %}
+
+    <div class="block block-rounded">
+        <div class="block-header">
+            <h1 class="block-title"><small>Reservation Liste</small></h1>
+        </div>
+        <div>
+
+            <a class="btn btn-alt-primary" href="{{ path('statRes') }}">Statistiques</a>
+            <a class="btn btn-alt-dark" href="{{ path('trieP') }}">Trie</a>
+        </div>
+        <div class="block-content block-content-full" style="overflow-x:auto;" >
+            <!-- DataTables init on table by adding .js-dataTable-buttons class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _es6/pages/be_tables_datatables.js -->
+            <table class="table ta table-striped table-vcenter js-dataTable-buttons" >
+                <thead>
+                <tr>
+                    <th class="text-center" style="width: 80px;">idReservation</th>
+                    <th class="d-none d-sm-table-cell">Items</th>
+                    <th class="d-none d-sm-table-cell" style="width: 30%;">Prix</th>
+                    <th class="d-none d-sm-table-cell" style="width: 15%;">Date de Reservation</th>
+                    <th style="width: 15%;">Actions</th>
+                    <th  style="width: 20px;">PDF</th>
+                    <th  style="width: 20px;">QrCode</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for reservation_panier in reservation_paniers %}
+                <tr>
+
+                    <td class="font-w600 font-size-sm">
+                        <a >{{ reservation_panier.id }}</a>
+                    </td>
+                    <td class="font-w600 font-size-sm">
+                        <a class="text-center">{{ reservation_panier.items ? reservation_panier.items|join(', ') : '' }}</a>
+                    </td>
+
+                    <td class="font-w600 font-size-sm">
+                        <a class="text-center">{{ reservation_panier.prix }}</a>
+                    </td>
+                    <td class="font-w600 font-size-sm">
+                        <a class="text-center">{{ reservation_panier.date | date("d/m/Y") }}</a>
+                    </td>
+                    <td class="font-w600 font-size-sm">
+                        <a href="{{ path('reservation_panier_show', {'id': reservation_panier.id}) }}">show</a>
+                        <a href="{{ path('reservation_panier_edit', {'id': reservation_panier.id}) }}">edit</a>
+                    </td>
+
+
+                    <td class="font-w600 font-size-sm"><a href="{{ path('reservaide_index', {'id': reservation_panier.id}) }}">  <div class="button mt-2 d-flex flex-row align-items-center"> <button class="btn btn-sm btn-outline-primary w-100">My Reservation</button> </div></a></td>
+
+
+
+                    {% else %}
+                <tr>
+                    <td colspan="6">no records found</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    </script>
+    <script>
+        $( document ).ready(function() {
+            $("#search").keyup(function(e){
+                /* La variable value va prendre la valeur insérer dans le champ de texte afin d’effectuer la recherche */
+                var value = $(this).val();
+        /* Ajax est lancé lors du remplissage du champ texte dont l’id est « search » pour faire la recherche */
+                $.ajax({
+                    /* l’url est une chaine de caractères contenant l’adresse où la requête est envoyée */
+                    url : "{{ path('searchReser') }}",
+                    /* La méthode utilisée pour transférer les données est GET */
+                    type : 'GET',
+                    /*Ici search value va prendre la chaine entrée par un utilisateur dans la zone de recherche et sera placée après l’url */
+                    data: {
+                        'searchValue' : value
+                    },
+                    /*Cette fonction permet de vider le contenu du tableau pour recevoir le nouveau contenu*/
+                    success : function(retour){
+                        if(retour){
+                            $('#t tbody#search').empty();
+                            $.each(JSON.parse(retour), function(i, obj) {
+                                $('#t tbody#all').hide();
+                                $('#t tbody#search').append('<tr><td> '+obj.id+'  </td><td>    '+obj.nsc+'  </td><td>'+obj.email+' </td><td><a href="updateStudent/'+obj.id+'">modifier</a> </br><a href="deleteStudent/'+obj.id+'">supprimer</a></td></tr>');
+                            });
+                        }
+                        else
+                        {
+                            $('#t tbody#all').show();
+                            $('#t tbody#search').empty();
+                            $('#t tbody#search').fadeIn('fast');
+                        }
+                    },
+                });
+                return false;
+            });
+        });
+    </script>
+
+
+
+
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

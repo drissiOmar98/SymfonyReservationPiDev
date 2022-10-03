@@ -1,0 +1,68 @@
+
+{% extends 'reservation/shop.html.twig' %}
+{% block nbrObject %}
+
+    <li class="main_nav_item">
+        <a href="{{ path('cart_index') }}" class="minicart-btn fc-header-toolbar">
+            <i class="pe-7s-shopbag"></i>
+            <span class="quantity">Panier</span>
+        </a>
+    </li>
+
+{% endblock %}
+
+{% block grid %}
+    <div class="offers_grid">
+    <table>
+        <tr {% for v in voll %}>
+
+            <div class="offers_item rating_4">
+                <div class="row">
+                    <div class="col-lg-1 temp_col"></div>
+                    <div class="col-lg-3 col-1680-4">
+                        <div class="offers_image_container">
+
+                            <div class="offers_image_background" style="background-image:url({{  asset('assets/media/photos/') ~ v.path }})"></div>
+                            <div class="offer_name"><a href="single_listing.html">{{ v.nom }}</a></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="offers_content">
+                            <div class="offers_price">${{ v.prix }}<span>per night</span></div>
+                            <div class="rating_r rating_r_4 offers_rating" data-rating="4">
+
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+
+
+                            </div>
+                            <h1 style="text-transform: uppercase;"><span><span>{{ v.vers }}</span></span></h1>
+                            <br>
+                            <br>
+                            <p class="offers_text">Suspendisse potenti. In faucibus massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eu convallis tortor. Lorem ipsum dolor sit amet.</p>
+                            <div class="offers_icons">
+                                <ul class="offers_icons_list">
+                                    <li class="offers_icons_item"><img src="{{  asset('images/post.png')}}" alt=""></li>
+                                    <li class="offers_icons_item"><img src=" {{  asset('images/compass.png')}}" alt=""></li>
+                                    <li class="offers_icons_item"><img src=" {{  asset('images/bicycle.png')}}" alt=""></li>
+                                    <li class="offers_icons_item"><img src=" {{  asset('images/sailboat.png')}}" alt=""></li>
+                                </ul>
+                            </div>
+                            <div class="button book_button"><a href="{{ path('AffiVoll', {'id': v.id}) }}">Show<span></span><span></span><span></span></a></div>
+                            <div class="offer_reviews">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </tr {% endfor %}>
+    </table>
+</div>
+    <div>
+        <a>{{ knp_pagination_render(voll) }}</a>
+    </div>
+{% endblock %}

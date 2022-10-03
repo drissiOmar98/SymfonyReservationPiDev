@@ -1,0 +1,21 @@
+{% extends 'base2.html.twig' %}
+{% block main %}
+    <div class="main-content" >
+        <section class="section">
+            <div class="section-body">
+                <div class="app-content">
+                    <div class="side-app">
+                        <div class="page-header">
+                        </div>
+                        <div id="div_chart"></div>
+
+                        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                        <script type="text/javascript">
+                            {{ gc_draw(piechart, 'div_chart') }}
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

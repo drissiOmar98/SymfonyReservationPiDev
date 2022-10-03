@@ -1,0 +1,59 @@
+{% extends 'base2.html.twig' %}
+    {% block body %}
+
+
+        <div style="margin: auto;width: 65%;
+            border: 3px Solid  pink;
+            padding: 5px;">
+
+            <h1>Ajouter Offre</h1>
+            {{ form_start(form,{'attr': {'novalidate': 'novalidate'}}) }}
+        <div style="padding-left: 50px" class="">
+            <table >
+                <tr>
+                   <td>{{ form_errors(form.nom) }}</td>
+                   <td>{{ form_label(form.nom," Titre De l'offre") }}</td>
+                    <td>{{ form_widget(form.nom) }}</td>
+                </tr>
+                <tr>
+                   <td>{{ form_errors(form.dateValidite) }}</td>
+                   <td>{{ form_label(form.dateValidite,"Date de validité") }}</td>
+                   <td>{{ form_widget(form.dateValidite) }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form_errors(form.tauxDeRemise) }}</td>
+                   <td>{{ form_label(form.tauxDeRemise,"Taux de remise") }}</td>
+                    <td>{{ form_widget(form.tauxDeRemise) }}</td>
+                </tr>
+                <tr>
+                   <td>{{ form_errors(form.description) }}</td>
+                    <td>{{ form_label(form.description,"Description") }}</td>
+                    <td>{{ form_widget(form.description) }}</td>
+                </tr>
+
+                <tr>
+                    <td>{{ form_errors(form.pathVideo) }}</td>
+                    <td>{{ form_label(form.pathVideo,"Path de video") }}</td>
+                    <td>{{ form_widget(form.pathVideo) }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form_errors(form.prix) }}</td>
+                    <td>{{ form_label(form.prix,"Prix") }}</td>
+                    <td>{{ form_widget(form.prix) }}</td>
+                </tr>
+            </table>
+
+
+           <div>
+               <button class="btn btn-success">
+                   {{ button_label|default('Ajouter') }}
+               </button>
+               <a href="{{ path('offres_index') }}" > retour </a>
+           </div>
+
+        </div>
+            {{ form_end(form) }}
+        </div>
+
+
+    {% endblock %}

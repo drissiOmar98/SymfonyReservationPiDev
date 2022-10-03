@@ -1,0 +1,126 @@
+{% extends 'reservation/shop.html.twig' %}
+{% block nbrObject %}
+
+    <li class="main_nav_item">
+        <a href="{{ path('cart_index') }}" class="minicart-btn fc-header-toolbar">
+            <i class="pe-7s-shopbag"></i>
+            <span class="quantity">Panier</span>
+        </a>
+    </li>
+
+{% endblock %}
+
+{% block grid %}
+    <div class="offers_grid">
+    <table>
+        <tr {% for e in events %}>
+
+            <div class="offers_item rating_4">
+                <div class="row">
+                    <div class="col-lg-1 temp_col"></div>
+                    <div class="col-lg-3 col-1680-4">
+                        <div class="offers_image_container">
+
+                            <div class="offers_image_background" style="background-image:url({{ asset('images/salles/')~e.path}})"></div>
+                            <div class="offer_name"><a href="single_listing.html">{{ e.nom}} in {{e.location }}</a></div>
+                        </div>
+
+                        <a href="{{ path('post_l',{'id': e.id}) }}" class="btn btn-link js-like">
+                            <i class="fas fa-thumbs-up"></i>
+
+                            <span class="js-likes">{{ e.likes | length }}</span>
+                            <span class="js-label">Like</span>
+                        </a>
+
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="offers_content">
+                            <div class="offers_price">${{ e.prix }}<span>in {{ e.period }} Jours</span></div>
+                            <div class="rating_r rating_r_3 offers_rating" >
+
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+
+
+                            </div>
+                            <h1 style="text-transform: uppercase;"><span><span>{{ e.location }}</span></span></h1>
+                            <p class="offers_text">Suspendisse potenti. In faucibus massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eu convallis tortor. Lorem ipsum dolor sit amet.</p>
+                            <div class="offers_icons">
+                                <ul class="offers_icons_list">
+                                    <li class="offers_icons_item"><img src="{{  asset('images/post.png')}}" alt=""></li>
+                                    <li class="offers_icons_item"><img src=" {{  asset('images/compass.png')}}" alt=""></li>
+                                    <li class="offers_icons_item"><img src=" {{  asset('images/bicycle.png')}}" alt=""></li>
+                                    <li class="offers_icons_item"><img src=" {{  asset('images/sailboat.png')}}" alt=""></li>
+                                </ul>
+                            </div>
+
+                            <div class="button book_button"><a href="{{ path('AffiEvents', {'id': e.id}) }}">Show<span></span><span></span><span></span></a></div>
+                            <div class="offer_reviews">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </tr {% endfor %}>
+    </table>
+
+        {% block javascripts %}
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script>
+
+
+
+            function onClickbtnLike(event){
+                event.preventDefault();
+
+                const url = this.href;
+
+                const spanCount=this.querySelector('span.js-likes');
+
+                axios.get(url).then(function(response){
+
+                    spanCount.textContent=response.data.likes;
+
+                })
+            }
+
+
+            document.querySelectorAll('a.js-like').forEach(function(link){
+                link.addEventListener('click',onClickbtnLike);
+            })
+
+
+        </script>
+
+        <script>
+            //aff-dislike
+
+
+            function onClickbtndisLike(event){
+                event.preventDefault();
+
+                const url = this.href;
+
+                const spanCount=this.querySelector('span.js-dislikes');
+
+                axios.get(url).then(function(response){
+
+                    spanCount.textContent=response.data.likes;
+
+                })
+            }
+
+
+            document.querySelectorAll('a.js-dislike').forEach(function(link){
+                link.addEventListener('click',onClickbtndisLike);
+            })
+        </script>
+
+</div>
+{% endblock %}
+
+{% endblock %}

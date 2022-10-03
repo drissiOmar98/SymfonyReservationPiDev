@@ -1,0 +1,33 @@
+{% extends 'base2.html.twig' %}
+    {% block body %}
+<div>
+
+        <h2 class="content-heading">ALL Comments</h2>
+        <div class="row">
+            {% for c in commentaire %}
+            <div class="col-md-6 col-xl-4">
+                <div class="block block-rounded">
+
+                    <div class="block-header bg-city-light">
+                        <h3 class="block-title">Publié le {{c.createdAt|date("d/m/Y H:i") }}</h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option">
+                                <i class="si si-settings"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="block-content">
+                        <p>{{ c.content }}</p>
+
+                    </div>
+                </div>
+            </div>
+
+
+            {% endfor %}
+
+        </div>
+
+</div>
+
+  {% endblock %}

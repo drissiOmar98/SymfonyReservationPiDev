@@ -1,0 +1,84 @@
+{% extends 'base2.html.twig' %}
+ {% block body %}
+     <div style="margin-right:50px;" class="btn btn-light" ><a href="{{ path('addcat') }}"> Add CategorieEvent</a></div></br> </br>
+     <div class="block block-rounded">
+
+         <div class="block-header">
+             <h3 class="block-title">CategorieEvents List </h3>
+             <!-- Left Section -->
+             <div class="d-flex align-items-center">
+
+                 <!-- Open Search Section (visible on smaller screens) -->
+                 <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+                 <button type="button" class="btn btn-sm btn-dual d-md-none" data-toggle="layout" data-action="header_search_on">
+                     <i class="fa fa-fw fa-search" ></i>
+                 </button>
+                 <!-- END Open Search Section -->
+
+
+                 <!-- END Search Form -->
+             </div>
+             <!-- END Left Section -->
+             <!-- END Left Section -->
+         </div>
+         <div class="block-content block-content-full">
+             <!-- DataTables init on table by adding .js-dataTable-full class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _es6/pages/be_tables_datatables.js -->
+
+             <table id="t"  class="table table-bordered table-striped table-vcenter js-dataTable-full">
+                 <thead>
+                 <tr>
+                     <th class="text-center" style="width: 80px;">IdCategorie</th>
+                     <th class="d-none d-sm-table-cell" style="width: 30%;">Type</th>
+                     <th class="d-none d-sm-table-cell" style="width: 15%;">Eventname</th>
+                     <th class="text-center" style="width: 80px;">Update/Delete</th>
+                 </tr>
+                 </thead>
+                 <tbody id="all">>
+                 {% for c in categorie %}
+                     <tr>
+                         <td class="text-center font-size-sm">{{ c.idcategorie }}</td>
+                         <td class="font-w600 font-size-sm">
+                             <a href="be_pages_generic_blank.html">{{ c.type }}</a>
+                         </td>
+                         <td class="d-none d-sm-table-cell font-size-sm">
+                             {{ c.id.nom}}
+                         </td>
+                         <td class="text-center">
+                             <button type="button" class="btn btn-alt-danger js-click-ripple-enabled" data-toggle="tooltip" title="Edit categorieEvent">
+                                 <a class="fa fa-fw fa-pencil-alt" href=" {{ path('updatecat',{'id':c.idcategorie}) }}" ></a>
+                             </button>
+
+                             <button type="button" class="btn btn-alt-danger js-click-ripple-enabled" data-toggle="tooltip" title="Remove categorieEvent">
+                                 <a class="fa fa-fw fa-times" href=" {{ path('b',{'id':c.idcategorie}) }}"></a>
+                             </button>
+                         </td>
+
+                     </tr>
+                 {% endfor %}
+                 </tbody>
+                 <tbody id="search">
+                 </tbody>
+
+             </table>
+
+
+
+
+
+         </div>
+     </div>
+
+
+
+ {% endblock %}
+
+
+
+
+
+
+
+
+
+
+

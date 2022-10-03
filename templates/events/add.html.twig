@@ -1,0 +1,50 @@
+{% extends 'base2.html.twig' %}
+    {% block body %}
+
+        <div style="margin: auto;width: 65%;
+            border: 3px Solid  pink;
+            padding: 5px;">
+
+            <h1>Add Event</h1>
+            {{ form_start(form,{'attr': {'novalidate': 'novalidate'}}) }}
+            <div style="padding-left: 50px">
+                <table>
+                    <tr>
+                        <td>{{ form_errors(form.nom) }}</td>
+                        <td>{{ form_label(form.nom,"nom") }}</td>
+                        <td>{{ form_widget(form.nom) }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form_errors(form.period) }}</td>
+                        <td>{{ form_label(form.period," Period") }}</td>
+                        <td>{{ form_widget(form.period) }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form_errors(form.location) }}</td>
+                        <td>{{ form_label(form.location,"Location") }}</td>
+                        <td>{{ form_widget(form.location) }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form_errors(form.date) }}</td>
+                        <td>{{ form_label(form.date,"DATE") }}</td>
+                        <td>{{ form_widget(form.date) }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form_errors(form.available) }}</td>
+                        <td>{{ form_label(form.available,"available") }}</td>
+                        <td>{{ form_widget(form.available) }}</td>
+                    </tr>
+
+                    <tr>
+                        <td>{{ form_errors(form.prix) }}</td>
+                        <td>{{ form_label(form.prix,"prix") }}</td>
+                        <td>{{ form_widget(form.prix) }}</td>
+                    </tr>
+
+                </table>
+            </div>
+            {{ form_end(form) }}
+        </div>
+
+
+    {% endblock %}

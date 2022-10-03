@@ -1,0 +1,6 @@
+{% extends 'base2.html.twig' %}
+{% block body %}
+    {{ form_start(f1, {attr: {'novalidate': 'novalidate'}}) }}
+
+    {{ form(f1) }}
+{% endblock %}

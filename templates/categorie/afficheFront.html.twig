@@ -1,0 +1,70 @@
+{% extends 'index2.html.twig' %}
+{% block body %}
+    <div style="margin: auto;
+  width: 65%;
+  border: 3px solid green;
+  padding: 5px;" class="block block-rounded">
+
+
+
+        <div class="blog-content">
+            <table>
+                <td>
+                    <h1>Liste of CategorieEvents</h1>
+                    <form action="{{ path('rechCat') }}" method="post">
+                        <label >Search</label>
+                        <input type="text" name="search" ><input type="submit" value="Recherche">
+                    </form>
+                </td>
+
+                {#<td>
+                <a href=" {{ path('triePrix') }}"> Trie Par Prix </a>
+            </td>#}
+
+
+            </table>
+
+
+
+            <div class="block block-rounded">
+                <div class="block-header">
+                    <h3 class="block-title">Categorie</h3>
+                    <div class="block-options">
+                        <div class="block-options-item">
+                            <code>.table-sm</code>
+                        </div>
+                    </div>
+                </div>
+                <div class="block-content">
+                    <table class="table table-sm table-vcenter">
+                        <thead>
+                        <tr>
+                            <th class="text-center" style="width: 50px;">Idcategorie</th>
+                            <th>Type</th>
+                            <th class="d-none d-sm-table-cell" style="width: 15%;">Idevent</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr {% for c in categorie %}>
+
+
+                            <td class="d-none d-sm-table-cell">
+                                <span class="badge badge-info">{{ c.idcategorie}}</span>
+                            </td>
+                            <td class="font-w600 font-size-sm">
+                                <a >{{ c.type }}</a>
+                            </td>
+                            <td class="font-w600 font-size-sm">
+                                <a >{{ c.idevent }}</a>
+                            </td>
+
+                        </tr {% endfor %}>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

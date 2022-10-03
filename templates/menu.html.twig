@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+{% block title %}Bienvenue{% endblock %}
+
+{% block body %}
+
+    <body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+    <style>
+        .mn {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 200px;
+            height: 450px;
+            background-color: #f1f1f1;
+            margin-left: 100px;
+            margin-top: 100px;
+        }
+
+        .lm a {
+            display: block;
+            color: #000;
+            padding: 8px 0 8px 16px;
+            text-decoration: none;
+        }
+
+        /* Change the link color on hover */
+        .lm a:hover {
+            background-color: #ffb320;
+            color: black;
+        }
+        .active {
+            background-color: #green;
+            color: green;
+        }
+    </style>
+
+
+
+
+
+    <!-- Latest news section -->
+    <div class="latest-news-section">
+        <div class="ln-title">Latest News</div>
+        <div class="news-ticker">
+            <div class="news-ticker-contant">
+                <div class="nt-item"><span class="new">new</span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </div>
+                <div class="nt-item"><span class="strategy">strategy</span>Isum dolor sit amet, consectetur adipiscing elit. </div>
+                <div class="nt-item"><span class="racing">racing</span>Isum dolor sit amet, consectetur adipiscing elit. </div>
+            </div>
+        </div>
+    </div>
+    <!-- Latest news section end -->
+
+    <section>
+    <ul class ="mn">
+        <li class ="lm"><a href="default.html">Products</a></li>
+        <li class ="lm"><a href="news.asp">Sales</a></li>
+        <li class ="lm"><a href="contact.asp">Events</a></li>
+        <li class ="lm"><a href="about.asp">Coachs</a></li>
+        <li class ="lm"><a href="about.asp">Exercices</a></li>
+    </ul>
+           <!-- Hero section -->
+
+
+                        <div class="hs-item set-bg" data-setbg="img/slider-1.jpg" style="height: 450px; width:600px;">
+
+                    </div>
+    </section>
+
+
+{% endblock %}

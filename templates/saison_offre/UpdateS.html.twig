@@ -1,0 +1,28 @@
+{% extends 'base2.html.twig' %}
+    {% block body %}
+        <div style="margin: auto;width: 65%;
+            border: 3px Solid  pink;
+            padding: 5px;">
+
+            <h1>Update Season</h1>
+            {{ form_start(form,{'attr': {'novalidate': 'novalidate'}}) }}
+            <table>
+              {# <tr>
+                    <td>{{ form_errors(form.idsaison) }}</td>
+                    <td>{{ form_label(form.idsaison,"Id De Saison") }}</td>
+                    <td>{{ form_widget(form.idsaison) }}</td>
+                </tr> #}
+                <tr>
+                    <td>{{ form_errors(form.idoffre) }}</td>
+                    <td>{{ form_label(form.idoffre,"Id de L'offre") }}</td>
+                    <td>{{ form_widget(form.idoffre) }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form_errors(form.titresaison) }}</td>
+                    <td>{{ form_label(form.titresaison," Titre De Saison") }}</td>
+                    <td>{{ form_widget(form.titresaison) }}</td>
+                </tr>
+            </table>
+            {{ form_end(form) }}
+        </div>
+    {% endblock %}

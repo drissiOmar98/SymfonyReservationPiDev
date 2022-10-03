@@ -1,0 +1,85 @@
+{% block body %}
+    <h1 align ="center" style="color:green;">Hotel</h1><hr>
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-primary">
+                            <h1 align="center" style="color:blue;">Les des Hotels</h1>
+
+                        </div>
+                        <!DOCTYPE html>
+                        <html>
+                        <head>
+                            <style>
+                                #customers {
+                                    font-family: Arial, Helvetica, sans-serif;
+                                    border-collapse: collapse;
+                                    width: 100%;
+                                }
+                                #customers td, #customers th {
+                                    border: 1px solid #ddd;
+                                    padding: 8px;
+                                }
+                                #customers tr:nth-child(even){background-color: #f2f2f2;}
+                                #customers tr:hover {background-color: #ddd;}
+                                #customers th {
+                                    padding-top: 12px;
+                                    padding-bottom: 12px;
+                                    text-align: left;
+                                    background-color: royalblue;
+                                    color: white;
+                                }
+                            </style>
+                        </head>
+                        </html>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <table class="table table-striped table-bordered" id="customers" >
+        <thead>
+        <tr>
+            <th class="wd-15p">
+
+                NomVol</th>
+            <th class="wd-15p">
+
+                DateDepart</th>
+            <th class="wd-15p">
+
+                DateArriver</th>
+            <th class="wd-15p">
+
+                Depart</th>
+            <th class="wd-15p">
+
+                Arriver</th>
+            <th class="wd-15p">
+
+
+                Hotel</th>
+
+
+        </tr>
+        </thead>
+        <tbody>
+        {%  for c in hotel %}
+        <tr >
+            <td>{{c.id}}</td>
+            <td>{{ c.lieu }}</td>
+            <td>{{ c.chambre }}</td>
+            <td>{{ c.etoile }}</td>
+            <td>{{ c.hebergement }}</td>
+            <td>{{ c.nom }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

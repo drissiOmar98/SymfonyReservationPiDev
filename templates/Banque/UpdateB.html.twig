@@ -1,0 +1,9 @@
+{% extends 'base2.html.twig' %}
+{% block body %}
+<h1>Update</h1>
+{{ form_start(form, {attr: {'novalidate': 'novalidate'}}) }}
+    {{ form_end(form) }}
+    <form method="post" action="{{ path('affB') }}">
+        <input class="btn btn-danger" type="submit" value="Annuler">
+    </form>
+{% endblock %}

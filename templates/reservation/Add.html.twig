@@ -1,0 +1,50 @@
+{% extends 'base2.html.twig' %}
+
+{% block body %}
+    <div style="margin: auto;
+    width: auto;
+    border: 3px solid green" class="block block-rounded" >
+        <h1>Ajout Reservation</h1>
+
+
+        {{ form_start(form,{'attr': {'novalidate': 'novalidate'}}) }}
+        <table>
+            <tr>
+
+                <td>{{ form_label(form.etat) }}</td>
+                <td>{{ form_widget(form.etat) }}</td>
+                <td> {{ form_errors(form.etat) }}</td>
+            </tr>
+            <tr>
+                <td>{{ form_label(form.posMap)}}</td>
+                <td>{{ form_widget(form.posMap)}}</td>
+                <td>{{ form_errors(form.posMap)}}</td>
+            </tr>
+            <tr>
+                <td>{{ form_label(form.prixt) }}</td>
+                <td>{{ form_widget(form.prixt) }}</td>
+                <td>{{ form_errors(form.prixt) }}</td>
+            </tr>
+            <tr>
+                <td>{{ form_label(form.numv) }}</td>
+                <td>{{ form_widget(form.numv) }}</td>
+                <td>{{ form_errors(form.numv) }}</td>
+            </tr>
+            <tr>
+                <td>{{ form_label(form.referance) }}</td>
+                <td>{{ form_widget(form.referance) }}</td>
+                <td>{{ form_errors(form.referance) }}</td>
+            </tr><tr>
+                <td>{{ form_label(form.idho) }}</td>
+                <td>{{ form_widget(form.idho) }}</td>
+                <td>{{ form_errors(form.idho) }}</td>
+            </tr>
+
+
+        </table>
+
+        {{ form_end(form) }}
+    </div>
+
+
+{% endblock %}

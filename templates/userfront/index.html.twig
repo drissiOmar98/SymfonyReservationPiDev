@@ -1,0 +1,102 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+    <h1>Users </h1>
+   <form method="post" action="{{ path('rechercheUser') }}">
+       <label>Search</label>
+       <input type="text" name="search"><input class="btn btn-success" type="submit" value="Recherche">
+   </form>
+
+    <hr>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>Cin</th>
+                <th>Verified</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.nom }}</td>
+                <td>{{ user.prenom }}</td>
+                <td>{{ user.email }}</td>
+                <td>{% for role in user.roles %}
+                        {% if role == "ADMIN" %}
+                            administrateur
+                        {% elseif role == "USER1" %}
+                            USER1
+                         {% elseif role == "USER2" %}
+                             USER2
+                         {% elseif role == "USER3" %}
+                         USER3
+                          {% elseif role == "USER4" %}
+                          USER4
+                          {% elseif role == "USER5" %}
+                           USER5
+                           {% elseif role == "USER6" %}
+                            USER6
+                           {% elseif role == "CLIENT" %}
+                             CLIENT
+                            {% endif %}
+                    {% endfor %}</td>
+                <td>{{ user.cin }}</td>
+                <td>{{ user.isVerified }}
+                <td>
+
+                    <a href="{{ path('user_show', {'id': user.id}) }}" class="btn btn-success btn-sm btn-icon"><i class="tim-icons icon-single-02"></i></a>
+                    <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-info btn-sm btn-icon" ><i class="tim-icons icon-settings"></i></a>
+                <td><img height="100" width="100" src="{{asset ('images/salles/'~ user.imageName)}} "></td>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{{ knp_pagination_render(users) }}
+    <a href="{{ path('user_newb') }}">Create new User</a>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,202 @@
+{% extends 'reservation/shop.html.twig' %}
+{% block nbrObject %}
+
+    <li class="main_nav_item">
+        <a href="{{ path('cart_index') }}" class="minicart-btn fc-header-toolbar">
+            <i class="pe-7s-shopbag"></i>
+            <span class="quantity">Panier</span>
+        </a>
+    </li>
+
+{% endblock %}
+{% block grid %}
+    <div class="container">
+    <table>
+
+
+        <div class="offers_item rating_4">
+            <div class="row">
+                <div class="col-lg-1 temp_col"></div>
+                <div class="col-lg-3 col-1680-4">
+                    <div class="offers_image_container">
+
+                        <div class="offers_image_background" style="background-image:url({{ asset('images/salles/')~ events.path}})"></div>
+                        <div class="offer_name"><a href="single_listing.html">{{ events.nom }}</a></div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="offers_content">
+                        <div class="offers_price">${{ events.prix }}<span>per night</span></div>
+                        <div class="rating_r rating_r_5 offers_rating" >
+
+                            <i></i>
+                            <i></i>
+                            <i></i>
+                            <i></i>
+                            <i></i>
+
+                        </div>
+                        <h1 style="text-transform: uppercase;"><span><span>{{ events.location }}</span></span></h1>
+                        <br>
+                        <br>
+                        <p class="offers_text">Suspendisse potenti. In faucibus massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eu convallis tortor. Lorem ipsum dolor sit amet.</p>
+                        <div class="offers_icons">
+                            <ul class="offers_icons_list">
+                                <li class="offers_icons_item"><img src="{{  asset('images/post.png')}}" alt=""></li>
+                                <li class="offers_icons_item"><img src=" {{  asset('images/compass.png')}}" alt=""></li>
+                                <li class="offers_icons_item"><img src=" {{  asset('images/bicycle.png')}}" alt=""></li>
+                                <li class="offers_icons_item"><img src=" {{  asset('images/sailboat.png')}}" alt=""></li>
+                            </ul>
+                        </div>
+                        <label for="ticketNum">Nombre à Reserver :</label>
+                        <form action="{{ path('cart_adde', {'id': events.id}) }}" method="post">
+                            <input type="number" name="quantity" min="1" max="5" value="1">
+                            <br><button  class="button book_button">
+                                <a style="color: white">Reserver<span></span><span></span><span></span></a>
+                            </button>
+                        </form>
+                        <div class="offer_reviews">
+                            <div class="offer_reviews_content">
+                                <div class="offer_reviews_title" id="name" style="font-size: 30px ;" >  </div>
+                                <div class="offer_reviews_title"  style="font-size: 30px ;padding-left: 80px" ></div>
+                                <div class="offer_reviews_subtitle desc"></div>
+                            </div>
+                            <div class="offer_reviews_rating text-center temp" ></div>
+                            <div class="col-md-10">
+                                {% if qrCode %}
+                                    <img src="{{ qrCode }}" alt="qr-code">
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </table>
+        <video controls width="1000">
+            <source src="{{ asset('assets/media/videos/') ~ events.available }}" type="video/mp4">
+
+            Voici <a href="assets/media/videos/hero_sunrise.mp4">un lien pour télécharger la vidéo</a>
+        </video>
+
+
+        <h1>Position sur carte </h1>
+        <!DOCTYPE html>
+        <html lang="fr">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta http-equiv="X-UA-Compatible" content="ie=edge">
+            <title>OpenStreetMap</title>
+            <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+            <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css">
+            <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css">
+            <!-- CSS -->
+            <style>
+                #maCarte{
+                    height: 400px;
+                }
+            </style>
+        </head>
+        <body>
+        <div id="results"></div>
+
+
+        <div id="maCarte"></div>
+
+        <!-- Fichiers Javascript -->
+
+        <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
+        <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+
+        <script type="text/javascript">
+
+
+
+            var main = document.querySelector('#name');
+            var temp = document.querySelector('.temp');
+            var desc = document.querySelector('.desc');
+
+
+            fetch('https://api.openweathermap.org/data/2.5/weather?q={{ events.location }}&units=metric&appid=50a7aa80fa492fa92e874d23ad061374')
+                .then(response => response.json())
+                .then(data => {
+                    var tempValue = data['main']['temp'];
+                    var nameValue = data['name'];
+                    var descValue = data['weather'][0]['description'];
+
+                    main.innerHTML += nameValue + "  ºC";
+                    desc.innerHTML = descValue;
+                    temp.innerHTML = tempValue.toFixed(1);
+
+                });
+
+
+            var results = document.querySelector("#results")
+
+
+            var url = "https://nominatim.openstreetmap.org/search?format=json&limit=3&q={{ events.location }}"
+            fetch(url)
+                .then(response => response.json())
+                .then(data => addressArr = data)
+                .then(show => PosiAddress())
+                .catch(err => console.log(err))
+
+
+
+            var tableauMarqueurs = [];
+
+            // On initialise la carte
+            var carte = L.map('maCarte').setView([48.852969, 2.349903], 13);
+
+            // On charge les "tuiles"
+            L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+                // Il est toujours bien de laisser le lien vers la source des données
+                attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
+                minZoom: 1,
+                maxZoom: 16
+            }).addTo(carte);
+
+            var marqueurs = L.markerClusterGroup();
+
+            // On personnalise le marqueur
+            var icone = L.icon({
+                iconUrl: "{{ asset('travelix/images/placeholder.svg') }}",
+                iconSize: [50, 50],
+                iconAnchor: [25, 50],
+                popupAnchor: [0, -50]
+            })
+            function PosiAddress() {
+                console.log(addressArr[0].display_name + " " + addressArr[0].lat + " " + addressArr[0].lon )
+
+                var villes = {
+                    "Villes": {"lat": addressArr[0].lat, "lon": addressArr[0].lon}
+
+                };
+                // On parcourt les différentes villes
+                for (ville in villes) {
+                    // On crée le marqueur et on lui attribue une popup
+                    var marqueur = L.marker([villes[ville].lat, villes[ville].lon], {icon: icone}); //.addTo(carte); Inutile lors de l'utilisation des clusters
+                    marqueur.bindPopup("<p>" + ville + "</p>");
+                    marqueurs.addLayer(marqueur); // On ajoute le marqueur au groupe
+
+                    // On ajoute le marqueur au tableau
+                    tableauMarqueurs.push(marqueur);
+                }
+
+
+                // On regroupe les marqueurs dans un groupe Leaflet
+                var groupe = new L.featureGroup(tableauMarqueurs);
+
+                // On adapte le zoom au groupe
+                carte.fitBounds(groupe.getBounds().pad(0.5));
+
+                carte.addLayer(marqueurs);
+            }
+        </script>
+        </body>
+        </html>
+
+    </div>
+
+{% endblock %}

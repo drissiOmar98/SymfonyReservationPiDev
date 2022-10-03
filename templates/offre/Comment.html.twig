@@ -1,0 +1,21 @@
+{% extends 'reservation/shop.html.twig' %}
+  {% block section1 %}
+      <div class="container">
+    {{ form_start(commentForm,{'attr': {'novalidate': 'novalidate'}}) }}
+
+    <table>
+        <td>
+            <td>{{ form_errors(commentForm.content) }}</td>
+            <td>{{ form_label(commentForm.content,"comment : ") }}</td>
+            <td>{{ form_widget(commentForm.content) }}</td>
+        </td>
+    </table>
+    <button class="btn btn-success">
+        {{ button_label|default('Send') }}
+    </button>
+
+    {{ form_end(commentForm) }}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,93 @@
+
+{% block body %}
+    <h1 align ="center" style="color:green;">Facture</h1><hr>
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-primary">
+                            <h1 align="center" style="color:blue;">Les des Factures</h1>
+
+                        </div>
+                        <!DOCTYPE html>
+                        <html>
+                        <head>
+                            <style>
+                                #customers {
+                                    font-family: Arial, Helvetica, sans-serif;
+                                    border-collapse: collapse;
+                                    width: 100%;
+                                }
+                                #customers td, #customers th {
+                                    border: 1px solid #ddd;
+                                    padding: 8px;
+                                }
+                                #customers tr:nth-child(even){background-color: #f2f2f2;}
+                                #customers tr:hover {background-color: #ddd;}
+                                #customers th {
+                                    padding-top: 12px;
+                                    padding-bottom: 12px;
+                                    text-align: left;
+                                    background-color: royalblue;
+                                    color: white;
+                                }
+                            </style>
+                        </head>
+                        </html>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table >
+        <thead>
+        <tr>
+            <th style="width: 80px;">ID</th>
+            <th >nom de banque</th>
+            <th >nom Client</th>
+            <th >date</th>
+            <th >Reglement</th>
+            <th >etat</th>
+            <th >tva</th>
+            <th >remise</th>
+            <th >NB</th>
+            <th >Totale</th>
+        </tr>
+        </thead>
+        <tbody{%  for c in facture %}>
+        <tr>
+            <td >{{c.idFac}}</td>
+            <td >
+                <span >{{c.banque.nomBanque}}</span>
+            </td>
+            <td >
+                <a href="">{{ c.nomClient }}</a>
+            </td>
+            <td  >
+                le <em >{{ c.dateFac |date('d-m-Y')}}</em>
+            </td>
+            <td>
+                <em >{{ c.reglementFac }}</em>
+            </td>
+            <td>
+                <em >{{ c.etatFac }}</em>
+            </td>
+            <td>
+                <em >{{ c.tvaFac }}</em>
+            </td>
+            <td>
+                <em >{{ c.remiseFac }}</em>
+            </td>
+            <td>
+                <em >{{ c.nbFac }}</em>
+            </td>
+            <td>
+                <em >{{ c.totaleFac }}</em>
+            </td>
+        </tbody {% endfor %}>
+    </table>
+
+
+{% endblock %}

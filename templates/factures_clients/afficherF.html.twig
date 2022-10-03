@@ -1,0 +1,103 @@
+{% extends 'base2.html.twig' %}
+
+
+{% block html %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+{% block body %}
+
+<h2>Liste des Factures </h2>
+<form method="post" action="{{ path('rechercheF') }}">
+    <label>Search</label>
+    <input type="text" name="search"><input class="btn btn-success" type="submit" value="Recherche">
+</form>
+
+    <div class="block-content block-content-full">
+        <!-- DataTables init on table by adding .js-dataTable-full class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _es6/pages/be_tables_datatables.js -->
+        <table class="table table-bordered table-striped table-vcenter js-dataTable-full">
+            <thead>
+            <tr>
+                <th class="text-center" style="width: 80px;">ID</th>
+                <th class="d-none d-sm-table-cell" style="width: 15%;">nom de banque</th>
+                <th class="d-none d-sm-table-cell" style="width: 15%;">nom Client</th>
+                <th class="d-none d-sm-table-cell" style="width: 20%;" >date</th>
+                <th class="d-none d-sm-table-cell" style="width: 15%;">Reglement</th>
+                <th class="d-none d-sm-table-cell" style="width: 15%;">etat</th>
+                <th class="d-none d-sm-table-cell" style="width: 15%;">tva</th>
+                <th class="d-none d-sm-table-cell" style="width: 15%;">remise</th>
+                <th class="d-none d-sm-table-cell" style="width: 30%;">NB</th>
+                <th class="d-none d-sm-table-cell" style="width: 15%;">Totale</th>
+                <th class="d-none d-sm-table-cell" style="width: 15%;">Update</th>
+                <th class="d-none d-sm-table-cell" style="width: 15%;">Delete</th>
+            </tr>
+            </thead>
+            <tbody{%  for c in facture %}>
+            <tr>
+                <td class="text-center font-size-sm">{{c.idFac}}</td>
+                <td class="d-none d-sm-table-cell">
+                    <span class="badge badge-success">{{c.banque.nomBanque}}</span>
+                </td>
+                <td class="font-w600 font-size-sm">
+                    <a href="">{{ c.nomClient }}</a>
+                </td>
+                <td class="d-none d-sm-table-cell font-size-sm" >
+                    le <em class="text-muted">{{ c.dateFac |date('d-m-Y')}}</em>
+                </td>
+                <td>
+                    <em class="text-muted font-size-sm">{{ c.reglementFac }}</em>
+                </td>
+                <td>
+                    <em class="text-muted font-size-sm">{{ c.etatFac }}</em>
+                </td>
+                <td>
+                    <em class="text-muted font-size-sm">{{ c.tvaFac }}</em>
+                </td>
+                <td>
+                    <em class="text-muted font-size-sm">{{ c.remiseFac }}</em>
+                </td>
+                <td>
+                    <em class="text-muted font-size-sm">{{ c.nbFac }}</em>
+                </td>
+                <td>
+                    <em class="text-muted font-size-sm">{{ c.totaleFac }}</em>
+                </td>
+
+                <td><a class="badge badge-danger" href=" {{ path('updateF',{'id':c.idFac}) }}" class="nav-link">Update</a></td>
+                <td><a class="badge badge-info" href=" {{ path('dF',{'id':c.idFac}) }}" class="nav-link">Delete</a></td>
+
+
+            </tr>
+            </tr>
+            </tbody {% endfor %}>
+        </table>
+    </div>
+
+    <form method="post" action="{{ path('triF') }} " >
+        <input class="btn btn-success" type="submit" value="Tri DESA">
+    </form>
+
+    <form method="post" action="{{ path('triFASC') }}">
+        <input class="btn btn-alt-info" type="submit" value="tri ASA">
+    </form>
+    <form method="post" action="{{ path('ajoutF') }}">
+        <input class="btn btn-success" type="submit" value="Ajouter ">
+    </form>
+    <form method="post" action="{{ path('list') }}">
+        <input class="btn btn-alt-info" type="submit" value="PDF">
+    </form>
+    <form method="post" action="{{ path('statistiquesFact') }}">
+        <input class="btn btn-success" type="submit" value="Statistiques">
+    </form>
+{% endblock %}
+</body>
+</html>
+{% endblock %}
+

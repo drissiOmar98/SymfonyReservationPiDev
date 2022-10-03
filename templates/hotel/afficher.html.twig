@@ -1,0 +1,80 @@
+{% extends 'base2.html.twig' %}
+{% block html %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+{% block body %}
+<h2 style="color:#AA3333;text-decoration: underline">Liste des hotels </h2>
+
+<form method="post" action="{{ path('recherche') }}">
+    <label style="font-weight: bold">Search</label>
+    <input type="text" name="search"><input type="submit" value="Recherche" class="btn btn-success">
+</form>
+    <div class="block-content block-content-full">
+        <!-- DataTables init on table by adding .js-dataTable-full class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _es6/pages/be_tables_datatables.js -->
+        <table class="table table-bordered table-striped table-vcenter js-dataTable-full">
+            <thead>
+            <tr>
+                <th class="text-center" style="width: 80px;">ID</th>
+                <th class="d-none d-sm-table-cell" style="width: 15%;">Siége</th>
+                <th class="d-none d-sm-table-cell" style="width: 15%;">Chambre</th>
+                <th class="d-none d-sm-table-cell" style="width: 20%;" >Etoile</th>
+                <th class="d-none d-sm-table-cell" style="width: 15%;">Hebergement</th>
+                <th class="d-none d-sm-table-cell" style="width: 15%;">Nom</th>
+                <th class="d-none d-sm-table-cell" style="width: 15%;">Update</th>
+                <th class="d-none d-sm-table-cell" style="width: 15%;">Delete</th>
+
+            </tr>
+            </thead>
+            <tbody{%  for c in hotel %}>
+            <tr>
+                <td class="text-center font-size-sm">{{c.id}}</td>
+                <td class="d-none d-sm-table-cell">
+                    <span class="badge badge-success">{{ c.lieu }}</span>
+                </td>
+
+                <td class="d-none d-sm-table-cell font-size-sm" >
+                    <em class="text-muted">{{ c.chambre }}</em>
+                </td>
+                <td>
+                    <em class="text-muted font-size-sm">{{ c.etoile }}</em>
+                </td>
+                <td>
+                    <em class="text-muted font-size-sm">{{ c.hebergement }}</em>
+                </td>
+                <td>
+                    <em class="text-muted font-size-sm">{{ c.nom }}</em>
+                </td>
+
+
+                <td><a class="badge badge-danger" href=" {{ path('mise',{'id':c.id}) }}" class="nav-link">Update</a></td>
+                <td><a class="badge badge-info" href=" {{ path('del',{'id':c.id}) }}" class="nav-link">Delete</a></td>
+
+
+            </tr>
+
+            </tbody {% endfor %}>
+        </table>
+    </div>
+
+
+<form method="post" action="{{ path('Add') }}" style="padding-left: 80px">
+    <input type="submit" value="Ajouter " class="btn btn-success">
+</form>
+
+    <form method="post" action="{{ path('impr') }}" style="padding-left: 80px">
+        <input type="submit" value="Imprimer " class="btn btn-success">
+    </form>
+
+{% endblock %}
+</body>
+</html>
+
+{% endblock %}

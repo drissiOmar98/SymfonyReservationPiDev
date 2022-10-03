@@ -1,0 +1,22 @@
+{% extends 'base2.html.twig' %}
+ {% block body %}
+
+    <div>
+     {{ form_start(form) }}
+     {{ form_row(form.name, {'attr': {'class': 'form-control', 'placeholder': 'Put The Name Of The Offer'}}) }}
+     <hr>
+     <button type="submit" class="btn-alt-danger">Generate</button>
+     {{ form_end(form) }}
+    </div>
+     <div class="col-md-6">
+         {% if qrCode %}
+             <img src="{{ qrCode }}" alt="qr-code">
+         {% endif %}
+     </div>
+     {# <img src="{{ offers }}" alt="qr-code"> #}
+
+
+    {# <img src="{{ asset('assets/qr-code' ~ offers) }}" alt="qr-code" class="img-fluid" style="width: 80px ; height : 40px ">#}
+
+
+ {% endblock %}

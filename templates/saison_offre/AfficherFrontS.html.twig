@@ -1,0 +1,70 @@
+{% extends 'base3/index2.html.twig' %}
+ {% block body %}
+
+
+     <div style="margin-left: auto;
+  margin-right: auto;padding: 15px">
+
+         <tr>
+
+              <form action="{{ path('searchSaisonFront') }}" method="post">
+                 <label >Recherche</label>
+                 <input type="text" name="searchS" ><input type="submit" value="Recherche">
+
+             </form>
+
+         </tr>
+
+             <div class="block block-rounded">
+                 <div class="block-header">
+                     <h3 class="block-title">LIST OF SEASONS</h3>
+                     <div class="block-options">
+                         <div class="block-options-item">
+                             <code>.table-sm</code>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="block-content">
+                     <table class="table table-sm table-vcenter">
+                         <thead>
+                         <tr>
+
+
+                             <th  style="width: 100px;">idsaison</th>
+                             <th  style="width: 100px;">idoffre</th>
+                             <th  style="width: 100px;">titresaison</th>
+
+
+
+                         </tr>
+                         </thead>
+                         <tbody>
+
+                        <tr {% for s in liste %} >
+                            {#  <td class="font-w600 font-size-sm">
+                                 <a class="badge badge-primary" >{{ s.idsaison}}</a>
+                             </td> #}
+                             <td class="font-w600 font-size-sm">
+                                 <a class="badge-secondary" >{{ s.idoffre}}</a>
+                             </td>
+                             <td class="font-w600 font-size-sm">
+                                 <a class="text-center">{{ s.titresaison }}</a>
+                             </td>
+
+
+                         </tr {% endfor %}>
+
+                         </tbody>
+                     </table>
+                 </div>
+
+
+
+     </div>
+
+ {% endblock %}
+
+
+
+{#      <td><a href=" {{ path('deleteS',{'id':s.idsaison}) }}">Delete</a></td>
+                     <td><a href=" {{ path('updateS',{'id':s.idsaison}) }}">Update</a></td> #}

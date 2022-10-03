@@ -1,0 +1,128 @@
+{% extends 'base2.html.twig' %}
+ {% block body %}
+     <div style="margin-right:50px;" class="btn btn-light" ><a href="{{ path('Add') }}"> Ajouter hotel</a></div></br>
+ <div class="block block-rounded">
+
+    <div class="block-header">
+        <h3 class="block-title">Hotel Lists </h3>
+        <!-- Left Section -->
+        <div class="d-flex align-items-center">
+
+            <!-- Open Search Section (visible on smaller screens) -->
+            <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+            <button type="button" class="btn btn-sm btn-dual d-md-none" data-toggle="layout" data-action="header_search_on">
+                <i class="fa fa-fw fa-search" ></i>
+            </button>
+            <!-- END Open Search Section -->
+
+            <!-- Search Form (visible on larger screens) -->
+            <form>
+                <div class="input-group input-group-sm">
+
+
+                    <div class="input-group-append">
+
+                    </div>
+                </div>
+            </form>
+            <!-- END Search Form -->
+        </div>
+        <!-- END Left Section -->
+        <!-- END Left Section -->
+    </div>
+    <div class="block-content block-content-full">
+        <!-- DataTables init on table by adding .js-dataTable-full class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _es6/pages/be_tables_datatables.js -->
+
+        <table id="t"  class="table table-bordered table-striped table-vcenter js-dataTable-full">
+            <thead>
+            <tr>
+                <th class="text-center" style="width: 80px;">ID</th>
+                <th>Lieu</th>
+                <th class="d-none d-sm-table-cell" style="width: 30%;">Chambre</th>
+                <th class="d-none d-sm-table-cell" style="width: 15%;">Etoile</th>
+                <th style="width: 15%;">Hebergement</th>
+
+                <th class="d-none d-sm-table-cell" style="width: 15%;">Path</th>
+                <th class="d-none d-sm-table-cell" style="width: 15%;">Video Path</th>
+                <th class="d-none d-sm-table-cell" style="width: 15%;">Prix</th>
+
+
+                <th class="text-center" style="width: 80px;">Nom</th>
+                <th class="text-center" style="width: 80px;">Update/Delete</th>
+            </tr>
+            </thead>
+            <tbody id="all">>
+            {% for c in hotel %}
+            <tr>
+                <td class="text-center font-size-sm">{{c.id}}</td>
+                <td class="font-w600 font-size-sm">
+                    <a href="be_pages_generic_blank.html">{{ c.lieu }}</a>
+                </td>
+                <td class="d-none d-sm-table-cell font-size-sm">
+                    {{ c.chambre }}
+                </td>
+                <td class="text-center font-size-sm">{{ c.etoile }}</td>
+
+                <td>
+                    <em class="text-muted font-size-sm">{{ c.hebergement }}</em>
+                </td>
+                <td class="d-none d-sm-table-cell">
+                    <span class="badge badge-info">{{ c.nom }}</span>
+                </td>
+                <td class="d-none d-sm-table-cell">
+                    <span class="badge badge-info">{{ c.path }}</span>
+                </td>
+                <td class="d-none d-sm-table-cell">
+                    <span class="badge badge-info">{{ c.pathVideo    }}</span>
+                </td>
+                <td class="d-none d-sm-table-cell">
+                    <span class="badge badge-info">{{ c.prix }}</span>
+                </td>
+
+                <td class="text-center">
+                    <button type="button" class="btn btn-alt-danger js-click-ripple-enabled" data-toggle="tooltip" title="Edit event">
+                        <a class="fa fa-fw fa-pencil-alt" href=" {{ path('mise',{'id':c.id}) }}" ></a>
+                    </button>
+
+                    <button type="button" class="btn btn-alt-danger js-click-ripple-enabled" data-toggle="tooltip" title="Remove event">
+                        <a class="fa fa-fw fa-times" href=" {{ path('del',{'id':c.id}) }}"></a>
+                    </button>
+                </td>
+
+            </tr >
+            {% endfor %}
+            </tbody>
+            <tbody id="search">
+            </tbody>
+
+        </table>
+
+        </table>
+        <form method="post" action="{{ path('Add') }}" style="padding-left: 80px">
+            <input type="submit" value="Ajouter " class="btn btn-success">
+        </form>
+
+
+        <form method="post" action="{{ path('impr') }}">
+            <input type="submit" value="PDF">
+        </form>
+
+
+
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+

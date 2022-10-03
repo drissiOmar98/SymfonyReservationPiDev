@@ -1,0 +1,38 @@
+</head>
+<body>
+<h1></h1>
+Categorie Type : {{ c.Type }}
+Events of {{ c.name }}
+<table border="1">
+    <tr>
+        <th>Idevent</th>
+        <th>Name</th>
+        <th>Period</th>
+        <th>Location</th>
+        <th>Date  </th>
+        <th>Available</th>
+        <th>Price</th>
+        <th>Categorie</th>
+
+    </tr>
+    <tr {% for e in events %}>
+        <td>{{ e.id }}</td>
+        <td>{{ e.nom }}</td>
+        <td>{{ e.period }}</td>
+        <td>{{ e.location }}</td>
+        <td>{{ e.date|date('d-m-Y') }}</td>
+        <td>{{ e.available }}</td>
+        <td>{{ e.prix }}</td>
+        <td>{{ e.categorie.Type }}</td>
+
+
+
+    </tr {% endfor %}>
+
+
+</table>
+
+
+</body>
+</html>
+

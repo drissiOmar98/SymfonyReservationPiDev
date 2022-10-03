@@ -1,0 +1,104 @@
+{% extends 'base3/index2.html.twig' %}
+ {% block body %}
+
+
+
+     <div style="margin-left: auto;
+  margin-right: auto">
+
+         <tr>
+
+             <form action="{{ path('searchoffref') }}" method="post">
+                 <label >Recherche</label>
+                 <input type="text" name="search1" ><input type="submit" value="Recherche">
+
+             </form>
+
+         </tr>
+         <tr>
+             <div class="block block-rounded">
+
+                 <div class="block-header">
+                     <h3 class="block-title">LIST OF OFFERS</h3>
+
+                     <div class="block-options">
+                         <div class="block-options-item">
+                             <code>.table-sm</code>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="block-content">
+                     <table class="table table-sm table-vcenter">
+                         <thead>
+                         <tr>
+                           {#<th  style="width: 100px;">idoffre</th> #}
+                             <th  style="width: 100px;">idReservation</th>
+                             <th  style="width: 100px;">titre</th>
+                             <th  style="width: 100px;">dateValidite</th>
+                             <th  style="width: 100px;">tauxDeRemise</th>
+                             <th  style="width: 100px;">description</th>
+                             <th  style="width: 100px;">pathImage</th>
+                             <th  style="width: 100px;">pathVideo</th>
+                             <th  style="width: 100px;">prix</th>
+
+                         </tr>
+                         </thead>
+                         <tbody>
+
+                         <tr {% for o in offers %} >
+                           {#   <td class="font-w600 font-size-sm">
+                                 <a class="badge badge-primary" >{{ o.idoffre }}</a>
+                             </td>  #}
+                             <td class="font-w600 font-size-sm">
+                                 <a class="badge-secondary" >{{ o.idReservation}}</a>
+                             </td>
+                             <td class="font-w600 font-size-sm">
+                                 <a class="text-center">{{ o.titre }}</a>
+                             </td>
+
+                             <td class="font-w600 font-size-sm">
+                                 <a class="text-center">{{ o.dateValidite|date('d-m-Y') }}</a>
+                             </td>
+                             <td class="font-w600 font-size-sm">
+                                 <a class="text-center">{{ o.tauxDeRemise }}</a>
+                             </td>
+                             <td class="font-w600 font-size-sm">
+                                 <a class="text-center">{{ o.description}}</a>
+                             </td>
+                             </td>
+
+
+                             <td class="font-w600 font-size-sm" ><img src="{{ asset('Uploads/images/offers/' ~ o.pathImage) }}" alt="" class="img-fluid" style="width: 80px ; height : 40px ">
+
+
+                             </td>
+                             <td class="font-w600 font-size-sm">
+                                 <a class="text-center">{{ o.pathVideo }}</a>
+                             </td>
+                             <td class="font-w600 font-size-sm">
+                                 <a class="text-center">{{ o.prix }}</a>
+                             </td>
+
+
+
+
+
+
+                         </tr {% endfor %}>
+
+                         </tbody>
+                     </table>
+                 </div>
+
+
+
+             </div>
+
+         </tr>
+     </div>
+
+
+
+
+
+ {% endblock %}

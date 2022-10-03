@@ -1,0 +1,158 @@
+{% extends 'base2.html.twig' %}
+ {% block body %}
+     <div style="margin-right:50px;" class="btn btn-light" ><a href="{{ path('addEvent') }}"> Add Event</a></div></br> </br>
+     <div style="margin-right:50px;" class="btn btn-alt-danger" ><a href="{{ path('List') }}"> Trie Par Prix DESC</a></div></br> </br>
+     <div style="margin-right:50px;" class="btn btn-alt-danger" ><a href="{{ path('QB') }}"> Trie Par Prix ASC</a></div></br> </br>
+ <div class="block block-rounded">
+
+    <div class="block-header">
+        <h3 class="block-title">Events Lists </h3>
+        <!-- Left Section -->
+        <div class="d-flex align-items-center">
+
+            <!-- Open Search Section (visible on smaller screens) -->
+            <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+            <button type="button" class="btn btn-sm btn-dual d-md-none" data-toggle="layout" data-action="header_search_on">
+                <i class="fa fa-fw fa-search" ></i>
+            </button>
+            <!-- END Open Search Section -->
+
+            <!-- Search Form (visible on larger screens) -->
+
+                <div class="input-group input-group-sm">
+
+
+                    <div class="input-group-append">
+
+                    </div>
+                </div>
+            </form>
+            <!-- END Search Form -->
+        </div>
+        <!-- END Left Section -->
+        <!-- END Left Section -->
+    </div>
+    <div class="block-content block-content-full">
+        <!-- DataTables init on table by adding .js-dataTable-full class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _es6/pages/be_tables_datatables.js -->
+
+        <table id="t"  class="table table-bordered table-striped table-vcenter js-dataTable-full">
+            <thead>
+            <tr>
+                <th class="text-center" style="width: 80px;">IDevent</th>
+                <th>Name</th>
+                <th class="d-none d-sm-table-cell" style="width: 30%;">Period</th>
+                <th class="d-none d-sm-table-cell" style="width: 15%;">Location</th>
+                <th style="width: 15%;">Date</th>
+                <th class="text-center" style="width: 80px;">Available</th>
+                <th class="text-center" style="width: 80px;">Price</th>
+                <th class="text-center" style="width: 80px;">Image</th>
+                <th class="text-center" style="width: 80px;">Update/Delete</th>
+                <th></th>
+
+            </tr>
+            </thead>
+            <tbody id="all">>
+            {% for e in events %}
+            <tr>
+                <td class="text-center font-size-sm">{{ e.id }}</td>
+                <td class="font-w600 font-size-sm">
+                    <a href="be_pages_generic_blank.html">{{ e.nom }}</a>
+                </td>
+                <td class="d-none d-sm-table-cell font-size-sm">
+                    {{ e.period }}
+                </td>
+                <td class="text-center font-size-sm">{{ e.location }}</td>
+
+                <td>
+                    <em class="text-muted font-size-sm">{{ e.date|date('d-m-Y') }}</em>
+                </td>
+                <td class="d-none d-sm-table-cell">
+                    <span class="badge badge-info">{{ e.available }}</span>
+                </td>
+                <td class="text-center font-size-sm">{{ e.prix }}</td>
+                <td><img src="{{ asset('upload/images/event/')~e.path}}" width="300px"/></td>
+                <td class="text-center">
+                    <button type="button" class="btn btn-alt-danger js-click-ripple-enabled" data-toggle="tooltip" title="Edit event">
+                        <a class="fa fa-fw fa-pencil-alt" href=" {{ path('updateevent',{'id':e.id}) }}" ></a>
+                    </button>
+
+                    <button type="button" class="btn btn-alt-danger js-click-ripple-enabled" data-toggle="tooltip" title="Remove event">
+                        <a class="fa fa-fw fa-times" href=" {{ path('deleteevent',{'id':e.id}) }}"></a>
+                    </button>
+                </td>
+
+            </tr >
+            {% endfor %}
+            </tbody>
+            <tbody id="search">
+            </tbody>
+
+        </table>
+
+
+        <div style="margin-right:50px;" class="btn btn-alt-primary" ><a href="{{ path('impr') }}"> Imprimer</a></div></br> </br>
+        <br>
+        <div style="margin-right:50px;" class="btn btn-alt-primary" ><a href="{{ path('statistiques') }}"> statistiques</a></div></br> </br>
+
+
+    </div>
+</div>
+
+
+
+
+{% endblock %}
+
+
+{% block javascritps %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    </script>
+    <script>
+        $( document ).ready(function() {
+            $("#search").keyup(function(e){
+                /* La variable value va prendre la valeur insérer dans le champ de texte afin d’effectuer la recherche */
+                var value = $(this).val();
+                /* Ajax est lancé lors du remplissage du champ texte dont l’id est « search » pour faire la recherche */
+                $.ajax({
+                    /* l’url est une chaine de caractères contenant l’adresse où la requête est envoyée */
+                    url : "{{ path('searchValue') }}",
+                    /* La méthode utilisée pour transférer les données est GET */
+                    type : 'GET',
+                    /*Ici search value va prendre la chaine entrée par un utilisateur dans la zone de recherche et sera placée après l’url */
+                    data: {
+                        'searchValue' : value
+                    },
+                    /*Cette fonction permet de vider le contenu du tableau pour recevoir le nouveau contenu*/
+                    success : function(retour){
+                        if(retour){
+                            $('#t tbody#search').empty();
+                            $.each(JSON.parse(retour), function(i, obj) {
+                                $('#t tbody#all').hide();
+                                $('#t tbody#search').append('<tr><td> '+obj.id+'  </td><td>    '+obj.nsc+'  </td><td>'+obj.email+' </td><td><a href="updateStudent/'+obj.id+'">modifier</a> </br><a href="deleteStudent/'+obj.id+'">supprimer</a></td></tr>');
+                            });
+                        }
+                        else
+                        {
+                            $('#t tbody#all').show();
+                            $('#t tbody#search').empty();
+                            $('#t tbody#search').fadeIn('fast');
+                        }
+                    },
+                });
+                return false;
+            });
+        });
+    </script>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,50 @@
+{% extends 'base2.html.twig' %}
+
+
+{% block html %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+{% block body %}
+
+<h2>Liste des Banque </h2>
+<form method="post" action="{{ path('rechercheB') }}">
+    <label>Search</label>
+    <input type="text" name="search"><input class="btn btn-success" type="submit" value="Recherche">
+</form>
+<table border="" class="table table-striped custom-table">
+    <tr>
+        <th>ID</th>
+        <th>nom banque</th>
+        <th>code</th>
+        <th>password</th>
+        <th>solde</th>
+        <th>Update</th>
+        <th>Delete</th>
+
+
+    </tr>
+    <tr {%  for c in banque %}>
+        <td>{{c.id}}</td>
+        <td>{{ c.nomBanque }}</td>
+        <td>{{ c.code }}</td>
+        <td>{{ c.pass }}</td>
+        <td>{{ c.solde }}</td>
+        <td><a href=" {{ path('updateB',{'id':c.id}) }}" class="nav-link">Update</a></td>
+        <td><a href=" {{ path('dB',{'id':c.id}) }}" class="nav-link">Delete</a></td>
+    </tr{% endfor %} >
+</table>
+    <form method="post" action="{{ path('ajoutB') }}">
+        <input class="btn btn-success" type="submit" value="Ajouter">
+    </form>
+{% endblock %}
+</body>
+</html>
+{% endblock %}

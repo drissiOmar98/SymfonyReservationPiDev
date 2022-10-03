@@ -1,0 +1,11 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+<div style="alignment: center">
+    <br>
+    <br>
+    <div>
+        <button style="width: 200px;height: 100px" class="btn btn-sm btn-alt-primary" data-toggle="confirmation">{{ button_label|default('Confirme ?') }}</button>
+    </div>
+</div>
+
+{{ form_end(form) }}

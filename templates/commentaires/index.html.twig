@@ -1,0 +1,118 @@
+{% extends 'baselog.html.twig' %}
+
+
+{% block title %}Commentaires index{% endblock %}
+
+{% block body %}
+<body>
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<!-- Header section -->
+
+
+<!-- Latest news section -->
+<div class="latest-news-section">
+    <div class="ln-title">Latest News</div>
+    <div class="news-ticker">
+        <div class="news-ticker-contant">
+            <div class="nt-item"><span class="new">new</span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </div>
+            <div class="nt-item"><span class="strategy">strategy</span>Isum dolor sit amet, consectetur adipiscing elit. </div>
+            <div class="nt-item"><span class="racing">racing</span>Isum dolor sit amet, consectetur adipiscing elit. </div>
+        </div>
+    </div>
+</div>
+<!-- Latest news section end -->
+
+
+<!-- Page info section -->
+
+    <div class="pi-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-5 col-lg-6 text-white">
+                    <h2>Our Community</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Page info section -->
+
+
+<!-- Page section -->
+<section class="page-section community-page set-bg" data-setbg="">
+    <div class="community-warp spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3 class="community-top-title">All Comments </h3>
+                </div>
+                <div class="col-md-6 text-lg-right">
+                    <form class="community-filter">
+                        <label for="fdf5">Show</label>
+                        <select id="fdf5">
+                            <option value="#">Everything</option>
+                            <option value="#">Everything</option>
+                        </select>
+                    </form>
+                </div>
+            </div>
+            <ul class="community-post-list">
+                {% for commentaire in commentaires %}<li>
+                    <div class="community-post">
+                        <div class="author-avator set-bg" data-setbg="img/authors/1.jpg"></div>
+                        <div class="post-content">
+                            <h5>{{ commentaire.nomUser }} {{ commentaire.prenomUser }}<span>posted an update</span></h5>
+                            <div class="post-date">June 21, 2018</div>
+                            <p>{{ commentaire.comm }}. </p>
+                        </div>
+                    </div>
+                </li>
+                {% else %}
+                    <tr>
+                        <td colspan="5">no records found</td>
+                    </tr>
+                {% endfor %}
+
+                 {{ knp_pagination_render(commentaires) }}
+            </ul>
+
+            {% if app.user  %}
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#popup1">
+                Ajouter Un Commentaire
+            </button>
+{% endif  %}
+            <div class="site-pagination sp-style-2">
+                <span class="active">01.</span>
+                <a href="#">02.</a>
+                <a href="#">03.</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Button -->
+
+
+<!-- Pop-up -->
+<div id="popup1" class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                {{ include('commentaires/_form.html.twig') }}
+
+            </div>
+        </div>
+    </div>
+<!-- Page section end -->
+<!-- Button -->
+
+
+
+{% endblock %}
+
+

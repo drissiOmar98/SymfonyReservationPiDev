@@ -1,0 +1,210 @@
+{% extends 'base2.html.twig' %}
+ {% block body %}
+<div class="content">
+    <!-- Overview -->
+    <div class="row row-deck">
+        <div class="col-sm-6 col-xl-3">
+            <!-- Pending Orders -->
+            <div class="block block-rounded d-flex flex-column">
+                <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
+                    <dl class="mb-0">
+                        <dt class="font-size-h2 font-w700">32</dt>
+                        <dd class="text-muted mb-0">Show All Offers</dd>
+                    </dl>
+                    <div class="item item-rounded bg-body">
+                        <i class="fa fa-shopping-cart font-size-h3 text-primary"></i>
+                    </div>
+                </div>
+                <div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
+                    <a class="font-w500 d-flex align-items-center" href="javascript:void(0)">
+
+                        <a class="fas fa-gifts"  href="{{ path('offres_index') }}"> View All Offers
+                            <i class="fa fa-arrow-alt-circle-right ml-1 opacity-25 font-size-base"></i>
+                        </a>
+                        </a>
+                </div>
+            </div>
+            <!-- END Pending Orders -->
+        </div>
+        <div class="col-sm-6 col-xl-3">
+            <!-- New Customers -->
+            <div class="block block-rounded d-flex flex-column">
+                <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
+                    <dl class="mb-0">
+                        <dt class="font-size-h2 font-w700">124</dt>
+                        <dd class="text-muted mb-0">Add New </dd>
+                    </dl>
+                    <div class="item item-rounded bg-body">
+                        <i class="fa fa-users font-size-h3 text-primary"></i>
+                    </div>
+                </div>
+                <div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
+                    <a class="font-w500 d-flex align-items-center" href="javascript:void(0)">
+
+                        <a class="fas fa-address-card"  href="{{ path('hotel_index') }}"> New Offer
+                            <i class="fa fa-arrow-alt-circle-right ml-1 opacity-25 font-size-base"></i>
+                        </a>
+                        </a>
+                </div>
+            </div>
+            <!-- END New Customers -->
+        </div>
+        <div class="col-sm-6 col-xl-3">
+            <!-- Messages -->
+            <div class="block block-rounded d-flex flex-column">
+                <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
+                    <dl class="mb-0">
+                        <dt class="font-size-h2 font-w700">12</dt>
+                        <dd class="text-muted mb-0">Show Comments</dd>
+                    </dl>
+                    <div class="item item-rounded bg-body">
+                        <i class="fa fa-inbox font-size-h3 text-primary"></i>
+                    </div>
+                </div>
+                <div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
+                    <a class="font-w500 d-flex align-items-center" href="javascript:void(0)">
+                        <a class="fas fa-comments"  href="{{ path('ShowComment') }}">
+                            View all Comments
+                            <i class="fa fa-arrow-alt-circle-right ml-1 opacity-25 font-size-base"></i>
+                        </a>
+                </div>
+            </div>
+            <!-- END Messages -->
+        </div>
+        <div class="col-sm-6 col-xl-3">
+            <!-- Conversion Rate -->
+            <div class="block block-rounded d-flex flex-column">
+                <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
+                    <dl class="mb-0">
+                        <dt class="font-size-h2 font-w700">4.5%</dt>
+                        <dd class="text-muted mb-0">Like/Dislike </dd>
+                    </dl>
+                    <div class="item item-rounded bg-body">
+                        <i class="fa fa-chart-line font-size-h3 text-primary"></i>
+                    </div>
+                </div>
+                <div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
+                    <a class="font-w500 d-flex align-items-center" href="javascript:void(0)">
+                        <a  class="fas fa-chart-line" href="{{path('statpro')}}"> View statistics </a>
+                        <i class="fa fa-arrow-alt-circle-right ml-1 opacity-25 font-size-base"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- END Conversion Rate-->
+        </div>
+    </div>
+    <!-- END Overview -->
+    <div class="block block-rounded">
+        <div class="block-header">
+            <h3 class="block-title"><small>Offers Liste</small></h3>
+
+        </div>
+        <div class="block-content block-content-full" style="overflow-x:auto;" >
+            {#
+            <a  class="fas fa-chart-line" href="{{path('statpro')}}">
+                 <i class="btn-alt-info">Statistics</i>
+             </a>
+            #}
+            <a class="fas fa-sort"  href="{{ path('trie') }}">
+                <i class="btn-alt-info" >Trie</i>
+            </a>
+            {#
+            <div>
+                  <a class="fas fa-comments"  href="{{ path('trie') }}">
+                      <i class="btn-alt-info" >Show Comments</i>
+                  </a>
+              </div>#}
+
+
+            <!-- DataTables init on table by adding .js-dataTable-buttons class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _es6/pages/be_tables_datatables.js -->
+            <table class="table table-bordered table-striped table-vcenter js-dataTable-buttons" >
+
+
+                <thead>
+                <tr>
+                    <th class="d-none d-sm-table-cell" >title</th>
+                    <th class="d-none d-sm-table-cell" style="width: 15%;">
+
+                        <i class="far fa-clock">Date</i>
+                    </th>
+                    <th class="d-none d-sm-table-cell" style="width: 15%;">
+                        <i class="fas fa-percent">Discount</i>
+                    </th>
+                    <th  class="d-none d-sm-table-cell"  style="width: 15%;">
+                        <i>description</i>
+                    </th>
+                    <th  class="d-none d-sm-table-cell" style="width: 15px;">
+                        <i class="far fa-image">Image</i>
+
+                    </th>
+                    <th class="d-none d-sm-table-cell"  style="width: 15px;">
+                        <i class="far fa-camera-alt">Video</i>
+                    </th>
+                    <th class="d-none d-sm-table-cell" style="width: 15px;">
+                        <i class="fas fa-dollar-sign">price</i>
+                    </th>
+                    <th  style="width: 20px;">Update/Delete</th>
+                    <th  style="width: 20px;">QrCode</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr {% for o in offers %} >
+                    <td class="font-w600 font-size-sm">
+                        <a class="text-center">{{ o.nom }}</a>
+                    </td>
+                    <td class="font-w600 font-size-sm">
+                        <a class="btn-danger">{{ o.dateValidite|date('d-m-Y') }}</a>
+                    </td>
+                    <td class="font-w600 font-size-sm">
+                        <a class="text-center">{{ o.tauxDeRemise }}</a>
+                    </td>
+                    <td class="font-w600 font-size-sm">
+                        <a class="text-center">{{ o.description}}</a>
+                    </td>
+                    <td class="font-w600 font-size-sm" ><img  src="{{ asset('Uploads/images/offers/' ~ o.path) }}" alt="" class="img-fluid" style="width: 80px ; height : 40px ">
+                    </td>
+
+                    <td class="font-w600 font-size-sm" >
+                        <a class="text-center"> {{ o.pathVideo  }}</a>
+
+                    </td>
+                    {# <a class="text-center">{{ o.pathVideo }}</a> #}
+
+                    <td class="font-w600 font-size-sm">
+                        <a class="btn-success">{{ o.prix }}</a>
+                    </td>
+                    <td class="text-center">
+                        {# <a href="{{ path('add_offer') }}"class="badge badge-success">Ajouter</a>#}
+                        <button type="button" class="btn btn-alt-info" data-toggle=" tooltip"  title="Edit OFFRE">
+                            <a class="fa fa-fw fa-pencil-alt" href=" {{ path('updateOffre',{'id':o.id}) }}" >
+                            </a>
+                        </button>
+                        <button type="button" class="btn btn-alt-info" data-toggle="tooltip" title="Remove OFFRE">
+                            <a class="far fa-trash-alt" href=" {{ path('delete',{'id':o.id}) }}"></a>
+
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button"  class="btn btn-alt-info" data-toggle="tooltip" title="QrCode"  name='clicked'  >
+                            <a class="" href=" {{ path('Qrpage',{'id':o.id}) }}">
+
+                                <i class="fas fa-qrcode"></i>
+                            </a>
+                        </button>
+
+                    </td>
+                </tr {% endfor %}>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div>
+        <a class="pagination-sm" >{{ knp_pagination_render(offers) }}</a>
+    </div>
+
+    {% endblock %}
+
+
+
+
+

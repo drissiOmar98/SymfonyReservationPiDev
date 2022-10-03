@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Map phase 2-3</title>
+</head>
+<body onload="init_map()">
+<h2>PHASE 2-3</h2>
+
+{{ form_start(form) }}
+{{ form_widget(form) }}
+{{ form_end(form) }}
+
+<div id="map" style="overflow: auto; width:100%; height: 400px;"></div>
+<p id="add-info"></p>
+
+<!-- JavaScript to show google map -->
+<!--Direction documentation: https://developers.google.com/maps/documentation/javascript/directions-->
+<script type="text/javascript">
+    function init_map() {
+        var directionsService = new google.maps.DirectionsService;
+        var directionsDisplay = new google.maps.DirectionsRenderer;
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 14,
+            center: {lat: 41.85, lng: -87.65},
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+        directionsDisplay.setMap(map);
+
+        var point1 = new google.maps.LatLng({{latA}}, {{lngA}});
+        var point2 = new google.maps.LatLng({{latB}}, {{lngB}});
+        directionsService.route({
+            origin: point1,
+            destination: point2,
+            travelMode: '{{mode}}'
+        }, function(response, status) {
+            if (status === 'OK') {
+                directionsDisplay.setDirections(response);
+            } else {
+                /*window.alert('Directions request failed due to ' + status);*/
+            }
+        });
+        //render information about direction
+        var distance = google.maps.geometry.spherical.computeDistanceBetween (point1, point2)/1000;    //unit in m, then convert to km
+        var info= "From: " + '{{add1}}' + "<br>" +
+            "To: " + '{{add2}}' + "<br>" +
+            "Total distance: " + distance.toFixed(2) + " km";     //round distance 2 decimal
+        document.getElementById('add-info').innerHTML = info;
+    }
+</script>
+<!--NOTE: make sure that your key is enable all map service also direction service-->
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6X7bjYwMznFgY2lARCmbA8er2H8IqqIc"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6X7bjYwMznFgY2lARCmbA8er2H8IqqIc&libraries=geometry"></script>
+</body>
+</html>

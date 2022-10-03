@@ -1,0 +1,35 @@
+{% extends 'baselog.html.twig' %}
+
+
+{% block title %}Commentaires{% endblock %}
+
+{% block body %}
+    <h1>Commentaires</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ commentaire.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom_user</th>
+                <td>{{ commentaire.nomUser }}</td>
+            </tr>
+            <tr>
+                <th>Prenom_user</th>
+                <td>{{ commentaire.prenomUser }}</td>
+            </tr>
+            <tr>
+                <th>Comm</th>
+                <td>{{ commentaire.comm }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('commentaires_index') }}">back to list</a>
+
+    <a href="{{ path('commentaires_edit', {'id': commentaire.id}) }}">edit</a>
+
+    {{ include('commentaires/_delete_form.html.twig') }}
+{% endblock %}

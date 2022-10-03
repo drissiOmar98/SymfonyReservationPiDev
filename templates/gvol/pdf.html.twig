@@ -1,0 +1,89 @@
+{% block body %}
+    <h1 align ="center" style="color:green;">Liste des vols</h1><hr>
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-primary">
+                            <h1 align="center" style="color:blue;">Vols</h1>
+
+                        </div>
+                        <!DOCTYPE html>
+                        <html>
+                        <head>
+                            <style>
+                                #customers {
+                                    font-family: Arial, Helvetica, sans-serif;
+                                    border-collapse: collapse;
+                                    width: 100%;
+                                }
+                                #customers td, #customers th {
+                                    border: 1px solid #ddd;
+                                    padding: 8px;
+                                }
+                                #customers tr:nth-child(even){background-color: #f2f2f2;}
+                                #customers tr:hover {background-color: #ddd;}
+                                #customers th {
+                                    padding-top: 12px;
+                                    padding-bottom: 12px;
+                                    text-align: left;
+                                    background-color: royalblue;
+                                    color: white;
+                                }
+                            </style>
+                        </head>
+                        </html>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <table class="table table-striped table-bordered" id="customers" >
+        <thead>
+        <tr>
+            <th class="wd-15p">
+
+                Id</th>
+            <th class="wd-15p">
+
+                NomVol</th>
+            <th class="wd-15p">
+
+                Date</th>
+            <th class="wd-15p">
+
+                Path</th>
+
+            <th class="wd-15p">
+
+                apartir</th>
+            <th class="wd-15p">
+
+                Vers</th>
+            <th class="wd-15p">
+                Chauffeur</th>
+
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for p in vol %}
+            <tr>
+                <td>{{ p.id }}</td>
+                <td>{{ p.nom }}</td>
+                <td>{{ p.dated |date('Y-m-d') }}</td>
+                <td>{{ p.path }}</td>
+                <td>{{ p.apartir }}</td>
+                <td>{{ p.vers }}</td>
+                <td>{{ p.chauffeur }}</td>
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

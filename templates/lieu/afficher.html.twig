@@ -1,0 +1,48 @@
+{% extends 'base2.html.twig' %}
+{% block html %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+{% block body %}
+<h2 style="color:#AA3333;text-decoration: underline">Liste Des Lieux </h2>
+
+    <form method="post" action="{{ path('rechercheLieu') }}">
+        <label style="font-weight: bold">Search</label>
+        <input type="text" name="search"><input type="submit" value="Recherche" class="btn btn-success">
+    </form>
+<table border="" class="table table-striped custom-table">
+    <tr>
+        <th>ID</th>
+        <TH>Lieu Hotel</TH>
+        <th>Nom</th>
+        <th>Update</th>
+        <th>Delete</th>
+
+    </tr>
+    <tr {%  for c in lieu %}>
+        <td>{{c.idL}}</td>
+        <td>{{ c.lieux }}</td>
+        <td>{{ c.Hootels.nom }}</td>
+        <td><a href=" {{ path('miseLieu',{'id':c.idL}) }}">Update</a></td>
+
+        <td><a href=" {{ path('delLieu',{'id':c.idL}) }}">Delete</a></td>
+
+
+    </tr{% endfor %} >
+
+    <form method="post" action="{{ path('AddLieu') }}" style="padding-left: 80px">
+        <input type="submit" value="Ajouter" class="btn btn-success">
+    </form>
+
+{% endblock %}
+</body>
+</html>
+
+{% endblock %}

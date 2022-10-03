@@ -1,0 +1,14 @@
+{% extends 'base2.html.twig' %}
+{% block body %}
+    <div style="margin: auto;width: 65%;
+            border: 3px Solid  pink;
+            padding: 5px;">
+
+<h1>Add Lieu </h1>
+{{ form_start(form, {attr: {'novalidate': 'novalidate'}}) }}
+{{ form_end(form) }}
+    <form method="post" action="{{ path('aff') }}" style="padding-left: 80px">
+        <input type="submit" value="Liste Siége Hotel" class="btn btn-success">
+    </form>
+    </div>
+{% endblock %}

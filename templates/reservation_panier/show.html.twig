@@ -1,0 +1,45 @@
+{% extends 'reservation/shop.html.twig' %}
+
+
+
+{% block grid %}
+    <div class="container">
+
+    <h1>ReservationPanier</h1>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ reservation_panier.id }}</td>
+            </tr>
+            <tr>
+                <th>Items</th>
+                <td>{{ reservation_panier.items ? reservation_panier.items|join(', ') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ reservation_panier.prix }}</td>
+            </tr>
+            <tr>
+                <th>Date de Reservation</th>
+                <td>{{ reservation_panier.date | date("d/m/Y") }}</td>
+            </tr>
+             <tr>
+                 <th>QrCode</th>
+                 <td>
+                     <div class="col-md-6">
+                         {% if qrCode %}
+                             <img src="{{ qrCode }}" alt="qr-code">
+                         {% endif %}
+                     </div>
+
+                 </td>
+
+             </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-sm btn-light" href="{{ path('reservation_panier_index') }}">back to list</a>
+    <a class="btn btn-sm btn-light" href="{{ path('reservation_panier_edit', {'id': reservation_panier.id}) }}">edit</a>
+    {{ include('reservation_panier/_delete_form.html.twig') }}
+</div>
+{% endblock %}

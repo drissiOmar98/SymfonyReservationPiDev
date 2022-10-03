@@ -1,0 +1,33 @@
+{% extends 'phase1.html.twig' %}
+
+
+{% block html %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+{% block body %}
+
+<h2>
+    <marquee behavior="" direction=""> Paiement </marquee></h2>
+<form method="post" action="{{ path('Verif') }}">
+    <label>valider</label>
+    <input type="text" name="search"><input class="btn btn-success" type="submit" value="valider">
+</form>
+    <table border="" class="table table-striped custom-table">
+        <tr {%  for c in verif %}>
+            <td>Etat de paiement : votre paiement vers {{ c.nomBanque }} a ete successe </td>
+              </tr{% endfor %} >
+    </table>
+
+
+{% endblock %}
+</body>
+</html>
+{% endblock %}

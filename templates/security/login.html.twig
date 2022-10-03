@@ -1,0 +1,74 @@
+{% extends 'baselog.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+    <!-- Latest news section -->
+    <div class="latest-news-section">
+        <div class="ln-title">Latest News</div>
+        <div class="news-ticker">
+            <div class="news-ticker-contant">
+                <div class="nt-item"><span class="new">new</span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </div>
+                <div class="nt-item"><span class="strategy">strategy</span>Isum dolor sit amet, consectetur adipiscing elit. </div>
+                <div class="nt-item"><span class="racing">racing</span>Isum dolor sit amet, consectetur adipiscing elit. </div>
+            </div>
+        </div>
+    </div>
+    <!-- Latest news section end -->
+
+
+    <!-- Page info section -->
+    <section class="page-info-section set-bg" data-setbg="" >
+        <div class="login_register_wrap section" >
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-6 col-md-10" >
+                        <div class="login_wrap" style="margin-top: 100px";  >
+                            <div class="padding_eight_all bg-white" >
+                                <form method="post" >
+                                    {% if error %}
+                                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                    {% endif %}
+
+                                    {% if app.user %}
+
+                                    {% endif %}
+
+                                    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+                                    <label for="inputEmail">Email</label>
+                                    <input type="email" value="{{ last_username }}" sty name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+                                    <label for="inputPassword">Password</label>
+                                    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+
+                                    <input type="hidden" name="_csrf_token"
+                                           value="{{ csrf_token('authenticate') }}"
+                                    >
+
+
+
+
+                                    <div class="checkbox mb-3">
+                                        <label>
+                                            <input type="checkbox" name="_remember_me"> Remember me
+                                        </label>
+
+                                        <a href="{{path('app_forgot_password_request')}}">Forgot password?</a>
+
+                                    </div>
+
+
+                                    <button class="btn btn-success animation-on-hover" type="submit" style="width: 400px; margin-left: 80px" >Se connecter</button>
+                                    <hr>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- Page info section -->
+
+{% endblock %}
